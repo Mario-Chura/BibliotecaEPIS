@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.proyecto.adminbibliotecaapp.R;
 import com.proyecto.adminbibliotecaapp.Vistas.VistaAutores;
 import com.proyecto.adminbibliotecaapp.Vistas.VistaCategorias;
-import com.proyecto.adminbibliotecaapp.Vistas.VistaEditoriales;
+import com.proyecto.adminbibliotecaapp.Vistas.VistaUbicaciones;
 import com.proyecto.adminbibliotecaapp.Vistas.VistaLibros;
 import com.proyecto.adminbibliotecaapp.Vistas.VistaPrestamos;
 import com.proyecto.adminbibliotecaapp.Vistas.VistaUsuarios;
@@ -67,8 +67,8 @@ public class AdaptadorMenu extends RecyclerView.Adapter<AdaptadorMenu.ViewHolder
                         intent = new Intent(context, VistaAutores.class);
                         context.startActivity(intent);
                         break;
-                    case "editoriales":
-                        intent = new Intent(context, VistaEditoriales.class);
+                    case "ubicaciones":
+                        intent = new Intent(context, VistaUbicaciones.class);
                         context.startActivity(intent);
                         break;
                     case "libros":

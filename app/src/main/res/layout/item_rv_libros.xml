@@ -42,13 +42,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <!--<TextView
-                    android:id="@+id/tvISBN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:hint="ISBN" /> -->
 
                 <TextView
                     android:id="@+id/tvNomLibro"

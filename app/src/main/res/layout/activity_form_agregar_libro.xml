@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:background="@color/morado_oscuro"
+            android:background="#64001D"
             android:gravity="center"
             android:padding="5dp"
             android:text="AGREGAR LIBRO"
@@ -31,10 +31,10 @@
             android:layout_marginVertical="2.5dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etISBN"
+                android:id="@+id/etCOD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="*ISBN"
+                android:hint="*COD"
                 android:maxLength="13" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,10 +91,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="2.5dp"
-            android:hint="*EDITORIAL">
+            android:hint="*UBICACION">
 
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                android:id="@+id/spiEditoriales"
+                android:id="@+id/spiUbicaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true" />

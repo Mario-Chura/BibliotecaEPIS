@@ -79,7 +79,7 @@ public class VistaPrestamos extends AppCompatActivity {
 
         for (Prestamo prestamo : listaPrestamos) {
             if(
-                    prestamo.getIsbn().toLowerCase().contains(texto.toLowerCase()) ||
+                    prestamo.getCod().toLowerCase().contains(texto.toLowerCase()) ||
                     prestamo.getNomLibro().toLowerCase().contains(texto.toLowerCase()) ||
                     prestamo.getIdUsuario().toLowerCase().contains(texto.toLowerCase()) ||
                     prestamo.getNomUsuario().toLowerCase().contains(texto.toLowerCase())
@@ -178,10 +178,10 @@ public class VistaPrestamos extends AppCompatActivity {
                                     JSONObject item = jsonArray.getJSONObject(i);
                                     listaPrestamos.add(
                                             new Prestamo(
-                                                    item.getString("isbn"),
+                                                    item.getString("cod"),
                                                     item.getString("nom_libro"),
                                                     item.getString("autor"),
-                                                    item.getString("editorial"),
+                                                    item.getString("ubicacion"),
                                                     item.getString("anio_publicacion"),
                                                     item.getString("edicion"),
                                                     item.getString("id_usuario"),

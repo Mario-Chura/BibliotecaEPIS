@@ -22,7 +22,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/morado_oscuro" />
+            android:background="#64001D" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

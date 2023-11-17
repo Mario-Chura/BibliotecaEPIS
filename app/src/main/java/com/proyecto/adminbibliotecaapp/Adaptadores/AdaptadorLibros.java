@@ -80,7 +80,7 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
                 .placeholder(context.getResources().getDrawable(R.drawable.icon_falta_foto))
                 .into(holder.ivPortada);
 
-        //holder.tvISBN.setText(listaLibros.get(position).getIsbn());
+        //holder.tvCOD.setText(listaLibros.get(position).getCod());
         holder.tvNomLibro.setText(listaLibros.get(position).getNom_libro());
         holder.tvAutor.setText(listaLibros.get(position).getAutor());
 
@@ -102,12 +102,12 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
 
     private void alertDialogPrestarLibro(int position) {
         Intent intent = new Intent(context, FormPrestamo.class);
-        intent.putExtra("isbn", listaLibros.get(position).getIsbn());
+        intent.putExtra("cod", listaLibros.get(position).getCod());
         intent.putExtra("nomLibro", listaLibros.get(position).getNom_libro());
         intent.putExtra("nomAutor", listaLibros.get(position).getAutor());
         intent.putExtra("nomCategoria", listaLibros.get(position).getCategoria());
         intent.putExtra("descrpcion", listaLibros.get(position).getDescripcion());
-        intent.putExtra("nomEditorial", listaLibros.get(position).getEditorial());
+        intent.putExtra("nomUbicacion", listaLibros.get(position).getUbicacion());
         intent.putExtra("anioPublicacion", listaLibros.get(position).getAnio_publicacion());
         intent.putExtra("edicion", listaLibros.get(position).getEdicion());
         intent.putExtra("existencias", listaLibros.get(position).getExistencias());
@@ -123,22 +123,22 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
 
         View vista = layoutInflater.inflate(R.layout.alert_dialog_info_libro, null);
 
-        TextView tvISBN = vista.findViewById(R.id.tvISBN);
+        TextView tvCOD = vista.findViewById(R.id.tvCOD);
         TextView tvNomLibro = vista.findViewById(R.id.tvNomLibro);
         TextView tvNomAutor = vista.findViewById(R.id.tvNomAutor);
         TextView tvCategoria = vista.findViewById(R.id.tvCategoria);
         TextView tvDescripcion = vista.findViewById(R.id.tvDescripcion);
-        TextView tvEditorial = vista.findViewById(R.id.tvEditorial);
+        TextView tvUbicacion = vista.findViewById(R.id.tvUbicacion);
         TextView tvAnioPublicacion = vista.findViewById(R.id.tvAnioPublicacion);
         TextView tvEdicion = vista.findViewById(R.id.tvEdicion);
         TextView tvExistencias = vista.findViewById(R.id.tvExistencias);
 
-        tvISBN.setText("ISBN: "+listaLibros.get(position).getIsbn());
+        tvCOD.setText("COD: "+listaLibros.get(position).getCod());
         tvNomLibro.setText("LIBRO: "+listaLibros.get(position).getNom_libro());
         tvNomAutor.setText("AUTOR: "+listaLibros.get(position).getAutor());
         tvCategoria.setText("CATEGORIA: "+listaLibros.get(position).getCategoria());
         tvDescripcion.setText("DESCRIPCIÓN: "+listaLibros.get(position).getDescripcion());
-        tvEditorial.setText("EDITORIAL: "+listaLibros.get(position).getEditorial());
+        tvUbicacion.setText("UBICACION: "+listaLibros.get(position).getUbicacion());
         tvAnioPublicacion.setText("AÑO DE PUBLICACIÓN: "+listaLibros.get(position).getAnio_publicacion());
         tvEdicion.setText("EDICIÓN: "+listaLibros.get(position).getEdicion());
         tvExistencias.setText("EXISTENCIAS: "+listaLibros.get(position).getExistencias());
@@ -170,7 +170,7 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
 
         CardView cvLibro;
         ImageView ivPortada;
-        TextView tvISBN, tvNomLibro, tvAutor;
+        TextView tvCOD, tvNomLibro, tvAutor;
         Button btnInformacion, btnPrestar;
 
         public ViewHolder(@NonNull View itemView) {
@@ -178,7 +178,7 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
 
             cvLibro = itemView.findViewById(R.id.cvLibro);
             ivPortada = itemView.findViewById(R.id.ivPortada);
-            tvISBN = itemView.findViewById(R.id.tvISBN);
+            tvCOD = itemView.findViewById(R.id.tvCOD);
             tvAutor = itemView.findViewById(R.id.tvAutor);
             tvNomLibro = itemView.findViewById(R.id.tvNomLibro);
             btnInformacion = itemView.findViewById(R.id.btnInformacion);

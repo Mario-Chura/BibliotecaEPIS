@@ -47,22 +47,22 @@ public class FormPrestamo extends AppCompatActivity {
         setContentView(vista);
 
         Intent intent = getIntent();
-        String isbn = intent.getStringExtra("isbn");
+        String cod = intent.getStringExtra("cod");
         String nomLibro = intent.getStringExtra("nomLibro");
         String nomAutor = intent.getStringExtra("nomAutor");
         String nomCategoria = intent.getStringExtra("nomCategoria");
         String descripcion = intent.getStringExtra("descripcion");
-        String nomEditorial = intent.getStringExtra("nomEditorial");
+        String nomUbicacion = intent.getStringExtra("nomUbicacion");
         String anioPublicacion = intent.getStringExtra("anioPublicacion");
         String edicion = intent.getStringExtra("edicion");
         int existencias = intent.getIntExtra("existencias",0);
 
-        binding.tvISBN.setText("ISBN: "+isbn);
+        binding.tvCOD.setText("COD: "+cod);
         binding.tvNomLibro.setText("LIBRO: "+nomLibro);
         binding.tvNomAutor.setText("AUTOR: "+nomAutor);
         binding.tvCategoria.setText("CATEGORIA: "+nomCategoria);
         binding.tvDescripcion.setText("DESCRIPCIÓN: "+descripcion);
-        binding.tvEditorial.setText("EDITORIAL: "+nomEditorial);
+        binding.tvUbicacion.setText("UBICACION: "+nomUbicacion);
         binding.tvAnioPublicacion.setText("AÑO DE PUBLICACIÓN: "+anioPublicacion);
         binding.tvEdicion.setText("EDICIÓN: "+edicion);
         binding.tvExistencias.setText("EXISTENCIAS: "+existencias);
@@ -79,11 +79,11 @@ public class FormPrestamo extends AppCompatActivity {
                     String[] arrUsuario = binding.spiUsuarios.getText().toString().trim().split(",");
                     String idUsuario = arrUsuario[0].trim();
 
-                    String[] arrIsbn = binding.tvISBN.getText().toString().trim().split(" ");
-                    String isbn = arrIsbn[1].trim();
+                    String[] arrCod = binding.tvCOD.getText().toString().trim().split(" ");
+                    String cod = arrCod[1].trim();
 
                     agregarPrestamo(
-                            isbn,
+                            cod,
                             idUsuario
                     );
                 }
@@ -91,8 +91,8 @@ public class FormPrestamo extends AppCompatActivity {
         });
     }
 
-    private void agregarPrestamo(String isbn, String idUsuario) {
-        //Toast.makeText(this, isbn+", "+idUsuario, Toast.LENGTH_LONG).show();
+    private void agregarPrestamo(String cod, String idUsuario) {
+        //Toast.makeText(this, cod+", "+idUsuario, Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, FormPrestamo.this.getString(R.string.url_api),
@@ -136,7 +136,7 @@ public class FormPrestamo extends AppCompatActivity {
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("accion", "703");
-                parametros.put("isbn", isbn);
+                parametros.put("cod", cod);
                 parametros.put("id_usuario", idUsuario);
 
                 return parametros;

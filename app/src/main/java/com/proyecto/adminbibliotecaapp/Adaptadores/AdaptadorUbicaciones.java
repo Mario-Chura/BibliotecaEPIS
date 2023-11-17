@@ -21,39 +21,37 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.proyecto.adminbibliotecaapp.Clases.Autor;
-import com.proyecto.adminbibliotecaapp.Clases.Editorial;
+import com.proyecto.adminbibliotecaapp.Clases.Ubicacion;
 import com.proyecto.adminbibliotecaapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoriales.ViewHolder> {
+public class AdaptadorUbicaciones extends RecyclerView.Adapter<AdaptadorUbicaciones.ViewHolder> {
 
     Context context;
-    List<Editorial> listaEditoriales;
+    List<Ubicacion> listaUbicaciones;
 
-    public AdaptadorEditoriales(Context context, List<Editorial> listaEditoriales) {
+    public AdaptadorUbicaciones(Context context, List<Ubicacion> listaUbicaciones) {
         this.context = context;
-        this.listaEditoriales = listaEditoriales;
+        this.listaUbicaciones = listaUbicaciones;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_editoriales, null, false);
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_ubicaciones, null, false);
         return new ViewHolder(vista);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.tvEditorial.setText(listaEditoriales.get(position).getNomEditorial().toUpperCase());
+        holder.tvUbicacion.setText(listaUbicaciones.get(position).getNomUbicacion().toUpperCase());
 
         holder.ibtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +63,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
         holder.ibtnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                borrarEditorial(listaEditoriales.get(position).getIdEditorial(), position);
+                borrarUbicacion(listaUbicaciones.get(position).getIdUbicacion(), position);
             }
         });
 
@@ -73,21 +71,21 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
 
     @Override
     public int getItemCount() {
-        return listaEditoriales.size();
+        return listaUbicaciones.size();
     }
 
     private void alertDialogEdit(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View vista = layoutInflater.inflate(R.layout.alert_dialog_edit_editorial, null);
+        View vista = layoutInflater.inflate(R.layout.alert_dialog_edit_ubicacion, null);
 
-        EditText etIdEditorial = vista.findViewById(R.id.etIdEditorial);
-        etIdEditorial.setEnabled(false);
-        etIdEditorial.setFocusable(false);
-        etIdEditorial.setText(listaEditoriales.get(position).getIdEditorial());
-        EditText etNomEditorial = vista.findViewById(R.id.etNomEditorial);
-        etNomEditorial.setText(listaEditoriales.get(position).getNomEditorial());
+        EditText etIdUbicacion = vista.findViewById(R.id.etIdUbicacion);
+        etIdUbicacion.setEnabled(false);
+        etIdUbicacion.setFocusable(false);
+        etIdUbicacion.setText(listaUbicaciones.get(position).getIdUbicacion());
+        EditText etNomUbicacion = vista.findViewById(R.id.etNomUbicacion);
+        etNomUbicacion.setText(listaUbicaciones.get(position).getNomUbicacion());
 
         builder.setView(vista);
         builder.create();
@@ -95,10 +93,10 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                if(etIdEditorial.getText().toString().equals("") || etNomEditorial.getText().toString().equals("")) {
+                if(etIdUbicacion.getText().toString().equals("") || etNomUbicacion.getText().toString().equals("")) {
                     Toast.makeText(context, "Se deben de llenar todos los campos", Toast.LENGTH_LONG).show();
                 } else {
-                    editarEditorial(etIdEditorial.getText().toString(), etNomEditorial.getText().toString(), position);
+                    editarUbicacion(etIdUbicacion.getText().toString(), etNomUbicacion.getText().toString(), position);
                 }
             }
         });
@@ -114,7 +112,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
         builder.show();
     }
 
-    private void editarEditorial(String idEditorial, String nomEditorial, int position) {
+    private void editarUbicacion(String idUbicacion, String nomUbicacion, int position) {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.url_api),
                 new Response.Listener<String>() {
@@ -130,7 +128,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
 
                             if(jsonObject.getString("codigo").equals("OK")) {
                                 Toast.makeText(context, jsonObject.getString("mensaje"), Toast.LENGTH_LONG).show();
-                                listaEditoriales.get(position).setNomEditorial(nomEditorial);
+                                listaUbicaciones.get(position).setNomUbicacion(nomUbicacion);
                                 notifyDataSetChanged();
                             }else if(jsonObject.getString("codigo").equals("ERROR")) {
                                 Toast.makeText(context, jsonObject.getString("mensaje"), Toast.LENGTH_LONG).show();
@@ -154,8 +152,8 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("accion", "404");
-                parametros.put("id_editorial", idEditorial);
-                parametros.put("nom_editorial", nomEditorial);
+                parametros.put("id_ubicacion", idUbicacion);
+                parametros.put("nom_ubicacion", nomUbicacion);
 
                 return parametros;
             }
@@ -165,7 +163,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
         requestQueue.add(stringRequest);
     }
 
-    private void borrarEditorial(String idEditorial, int position) {
+    private void borrarUbicacion(String idUbicacion, int position) {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.url_api),
                 new Response.Listener<String>() {
@@ -181,7 +179,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
 
                             if(jsonObject.getString("codigo").equals("OK")) {
                                 Toast.makeText(context, jsonObject.getString("mensaje"), Toast.LENGTH_LONG).show();
-                                listaEditoriales.remove(position);
+                                listaUbicaciones.remove(position);
                                 notifyDataSetChanged();
                             }else if(jsonObject.getString("codigo").equals("ERROR")) {
                                 Toast.makeText(context, jsonObject.getString("mensaje"), Toast.LENGTH_LONG).show();
@@ -205,7 +203,7 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("accion", "405");
-                parametros.put("id_editorial", idEditorial);
+                parametros.put("id_ubicacion", idUbicacion);
 
                 return parametros;
             }
@@ -217,13 +215,13 @@ public class AdaptadorEditoriales extends RecyclerView.Adapter<AdaptadorEditoria
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvEditorial;
+        TextView tvUbicacion;
         ImageButton ibtnEdit, ibtnRemove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvEditorial = itemView.findViewById(R.id.tvEditorial);
+            tvUbicacion = itemView.findViewById(R.id.tvUbicacion);
             ibtnEdit = itemView.findViewById(R.id.ibtnEditar);
             ibtnRemove = itemView.findViewById(R.id.ibtnEliminar);
         }

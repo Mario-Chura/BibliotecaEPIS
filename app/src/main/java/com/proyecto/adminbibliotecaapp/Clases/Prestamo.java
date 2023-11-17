@@ -2,10 +2,10 @@ package com.proyecto.adminbibliotecaapp.Clases;
 
 public class Prestamo {
 
-    private String isbn;
+    private String cod;
     private String nomLibro;
     private String nomAutor;
-    private String nomEditorial;
+    private String nomUbicacion;
     private String anioPublicacion;
     private String edicion;
     private String idUsuario;
@@ -16,13 +16,13 @@ public class Prestamo {
     public Prestamo() { }
 
     public Prestamo(
-            String isbn,
+            String cod,
             String idUsuario,
             String nomUsuario,
             String fechaPrestamo,
             String fechaDevolucion
     ) {
-       this.isbn = isbn;
+       this.cod = cod;
        this.idUsuario = idUsuario;
        this.nomUsuario = nomUsuario;
        this.fechaPrestamo = fechaPrestamo;
@@ -30,10 +30,10 @@ public class Prestamo {
     }
 
     public Prestamo(
-            String isbn,
+            String cod,
             String nomLibro,
             String nomAutor,
-            String nomEditorial,
+            String nomUbicacion,
             String anioPublicacion,
             String edicion,
             String idUsuario,
@@ -41,10 +41,10 @@ public class Prestamo {
             String fechaPrestamo,
             String fechaDevolucion
     ) {
-        this.isbn = isbn;
+        this.cod = cod;
         this.nomLibro = nomLibro;
         this.nomAutor = nomAutor;
-        this.nomEditorial = nomEditorial;
+        this.nomUbicacion = nomUbicacion;
         this.anioPublicacion = anioPublicacion;
         this.edicion = edicion;
         this.idUsuario = idUsuario;
@@ -53,12 +53,12 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getCod() {
+        return cod;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
     public String getNomLibro() {
@@ -77,12 +77,12 @@ public class Prestamo {
         this.nomAutor = nomAutor;
     }
 
-    public String getNomEditorial() {
-        return nomEditorial;
+    public String getNomUbicacion() {
+        return nomUbicacion;
     }
 
-    public void setNomEditorial(String nomEditorial) {
-        this.nomEditorial = nomEditorial;
+    public void setNomUbicacion(String nomUbi) {
+        this.nomUbicacion = nomUbicacion;
     }
 
     public String getAnioPublicacion() {

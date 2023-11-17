@@ -2,12 +2,12 @@ package com.proyecto.adminbibliotecaapp.Clases;
 
 public class Libro {
 
-    private String isbn;
+    private String cod;
     private String portada;
     private String nom_libro;
     private String autor;
     private String descripcion;
-    private String editorial;
+    private String ubicacion;
     private String anio_publicacion;
     private String edicion;
     private int existencias;
@@ -16,34 +16,34 @@ public class Libro {
     public Libro() { }
 
     public Libro(
-            String isbn,
+            String cod,
             String portada,
             String nom_libro,
             String autor,
             String descripcion,
-            String editorial,
+            String ubicacion,
             String anio_publicacion,
             String edicion,
             int existencias,
             String categoria) {
-        this.isbn = isbn;
+        this.cod = cod;
         this.portada = portada;
         this.nom_libro = nom_libro;
         this.autor = autor;
         this.descripcion = descripcion;
-        this.editorial = editorial;
+        this.ubicacion = ubicacion;
         this.anio_publicacion = anio_publicacion;
         this.edicion = edicion;
         this.existencias = existencias;
         this.categoria = categoria;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getCod() {
+        return cod;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
     public String getPortada() {
@@ -78,12 +78,12 @@ public class Libro {
         this.descripcion = descripcion;
     }
 
-    public String getEditorial() {
-        return editorial;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public String getAnio_publicacion() {

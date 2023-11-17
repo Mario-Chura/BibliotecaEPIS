@@ -2,7 +2,6 @@ package com.proyecto.adminbibliotecaapp.Adaptadores;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.proyecto.adminbibliotecaapp.Clases.Editorial;
 import com.proyecto.adminbibliotecaapp.Clases.Usuario;
 import com.proyecto.adminbibliotecaapp.R;
 
@@ -75,7 +73,7 @@ public class AdaptadorUsuarios extends RecyclerView.Adapter<AdaptadorUsuarios.Vi
         holder.ibtnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                borrarEditorial(listaUsuarios.get(position).getIdUsuario(), position);
+                borrarUbicacion(listaUsuarios.get(position).getIdUsuario(), position);
             }
         });
 
@@ -187,7 +185,7 @@ public class AdaptadorUsuarios extends RecyclerView.Adapter<AdaptadorUsuarios.Vi
         requestQueue.add(stringRequest);
     }
 
-    private void borrarEditorial(String idUsuario, int position) {
+    private void borrarUbicacion(String idUsuario, int position) {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.url_api),
                 new Response.Listener<String>() {

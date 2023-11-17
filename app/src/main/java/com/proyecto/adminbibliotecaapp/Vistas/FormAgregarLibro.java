@@ -21,7 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.proyecto.adminbibliotecaapp.Clases.Autor;
 import com.proyecto.adminbibliotecaapp.Clases.Categoria;
-import com.proyecto.adminbibliotecaapp.Clases.Editorial;
+import com.proyecto.adminbibliotecaapp.Clases.Ubicacion;
 import com.proyecto.adminbibliotecaapp.R;
 import com.proyecto.adminbibliotecaapp.databinding.ActivityFormAgregarLibroBinding;
 
@@ -40,7 +40,7 @@ public class FormAgregarLibro extends AppCompatActivity {
     private ActivityFormAgregarLibroBinding binding;
 
     List<Autor> listaAutores;
-    List<Editorial> listaEditoriales;
+    List<Ubicacion> listaUbicaciones;
     List<Categoria> listaCategorias;
 
     @Override
@@ -51,7 +51,7 @@ public class FormAgregarLibro extends AppCompatActivity {
         setContentView(vista);
 
         obtenerAutores();
-        obtenerEditoriales();
+        obtenerUbicaciones();
         obtenerCategorias();
 
         binding.btnAddLibro.setOnClickListener(new View.OnClickListener() {
@@ -65,14 +65,14 @@ public class FormAgregarLibro extends AppCompatActivity {
 
     private void validarCampos() {
         if (
-                binding.etISBN.getText().toString().trim().equals("") ||
-                binding.etNomLibro.getText().toString().trim().equals("") ||
-                binding.spiAutores.getText().toString().trim().equals("") ||
-                binding.spiEditoriales.getText().toString().trim().equals("") ||
-                binding.spiCategorias.getText().toString().trim().equals("") ||
-                binding.etAnioPublicacion.getText().toString().trim().equals("") ||
-                binding.etEdicion.getText().toString().trim().equals("") ||
-                binding.etExistencias.getText().toString().trim().equals("")
+                binding.etCOD.getText().toString().trim().equals("") ||
+                        binding.etNomLibro.getText().toString().trim().equals("") ||
+                        binding.spiAutores.getText().toString().trim().equals("") ||
+                        binding.spiUbicaciones.getText().toString().trim().equals("") ||
+                        binding.spiCategorias.getText().toString().trim().equals("") ||
+                        binding.etAnioPublicacion.getText().toString().trim().equals("") ||
+                        binding.etEdicion.getText().toString().trim().equals("") ||
+                        binding.etExistencias.getText().toString().trim().equals("")
         ) {
             Toast.makeText(FormAgregarLibro.this, "Tienes que llenar los campos marcados con *.", Toast.LENGTH_LONG).show();
         } else {
@@ -80,18 +80,18 @@ public class FormAgregarLibro extends AppCompatActivity {
             String[] arrAutor = binding.spiAutores.getText().toString().trim().split(",");
             String nomAutor = arrAutor[1];
 
-            String[] arrEditorial = binding.spiEditoriales.getText().toString().trim().split(",");
-            String nomEditorial = arrEditorial[1];
+            String[] arrUbicacion = binding.spiUbicaciones.getText().toString().trim().split(",");
+            String nomUbicacion = arrUbicacion[1];
 
             String[] arrCategoria = binding.spiCategorias.getText().toString().trim().split(",");
             String nomCategoria = arrCategoria[1];
 
             agregarLibro(
-                    binding.etISBN.getText().toString().trim(),
+                    binding.etCOD.getText().toString().trim(),
                     binding.etNomLibro.getText().toString().trim(),
                     nomAutor,
                     binding.etDescripcion.getText().toString().trim(),
-                    nomEditorial,
+                    nomUbicacion,
                     nomCategoria,
                     binding.etAnioPublicacion.getText().toString().trim(),
                     binding.etEdicion.getText().toString().trim(),
@@ -101,11 +101,11 @@ public class FormAgregarLibro extends AppCompatActivity {
     }
 
     private void agregarLibro(
-            String isbn,
+            String cod,
             String nomLibro,
             String nomAutor,
             String descripcion,
-            String nomEditorial,
+            String nomUbicacion,
             String nomCategoria,
             String anioPublicacion,
             String edicion,
@@ -152,11 +152,11 @@ public class FormAgregarLibro extends AppCompatActivity {
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("accion", "603");
-                parametros.put("isbn", isbn);
+                parametros.put("cod", cod);
                 parametros.put("nom_libro", nomLibro);
                 parametros.put("nom_autor", nomAutor);
                 parametros.put("descripcion", descripcion);
-                parametros.put("nom_editorial", nomEditorial);
+                parametros.put("nom_ubicacion", nomUbicacion);
                 parametros.put("nom_categoria", nomCategoria);
                 parametros.put("anio_publicacion", anioPublicacion);
                 parametros.put("edicion", edicion);
@@ -233,8 +233,8 @@ public class FormAgregarLibro extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void obtenerEditoriales() {
-        listaEditoriales = new ArrayList<>();
+    private void obtenerUbicaciones() {
+        listaUbicaciones = new ArrayList<>();
 
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, FormAgregarLibro.this.getString(R.string.url_api),
@@ -242,7 +242,7 @@ public class FormAgregarLibro extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        //Toast.makeText(VistaEditoriales.this, response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(VistaUbicaciones.this, response, Toast.LENGTH_SHORT).show();
                         //System.out.println("RESPONSE: "+response);
 
                         try {
@@ -250,15 +250,15 @@ public class FormAgregarLibro extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             //System.out.println(""+jsonObject.getString("codigo"));
                             if(jsonObject.getString("codigo").equals("OK")) {
-                                //System.out.println(""+jsonObject.getString("editoriales"));
-                                JSONArray jsonArray = jsonObject.getJSONArray("editoriales");
+                                //System.out.println(""+jsonObject.getString("ubicaciones"));
+                                JSONArray jsonArray = jsonObject.getJSONArray("ubicaciones");
 
                                 for (int i = 0 ; i < jsonArray.length() ; i++) {
                                     JSONObject item = jsonArray.getJSONObject(i);
-                                    listaEditoriales.add(
-                                            new Editorial(
-                                                    item.getString("id_editorial"),
-                                                    item.getString("nom_editorial")
+                                    listaUbicaciones.add(
+                                            new Ubicacion(
+                                                    item.getString("id_ubicacion"),
+                                                    item.getString("nom_ubicacion")
                                             )
                                     );
                                 }
@@ -270,8 +270,8 @@ public class FormAgregarLibro extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        ArrayAdapter<Editorial> adapter = new ArrayAdapter<>(FormAgregarLibro.this, android.R.layout.simple_spinner_item, listaEditoriales);
-                        binding.spiEditoriales.setAdapter(adapter);
+                        ArrayAdapter<Ubicacion> adapter = new ArrayAdapter<>(FormAgregarLibro.this, android.R.layout.simple_spinner_item, listaUbicaciones);
+                        binding.spiUbicaciones.setAdapter(adapter);
                     }
                 }, new Response.ErrorListener() {
             @Override

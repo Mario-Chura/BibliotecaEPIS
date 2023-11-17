@@ -84,10 +84,10 @@ public class AdaptadorPrestamos extends RecyclerView.Adapter<AdaptadorPrestamos.
         TextView tvIdUsuario = vista.findViewById(R.id.tvIdUsuario);
         TextView tvNomUsuario = vista.findViewById(R.id.tvNomUsuario);
 
-        TextView tvISBN = vista.findViewById(R.id.tvISBN);
+        TextView tvCOD = vista.findViewById(R.id.tvCOD);
         TextView tvNomLibro = vista.findViewById(R.id.tvNomLibro);
         TextView tvNomAutor = vista.findViewById(R.id.tvNomAutor);
-        TextView tvEditorial = vista.findViewById(R.id.tvEditorial);
+        TextView tvUbicacion = vista.findViewById(R.id.tvUbicacion);
         TextView tvAnioPublicacion = vista.findViewById(R.id.tvAnioPublicacion);
         TextView tvEdicion = vista.findViewById(R.id.tvEdicion);
 
@@ -95,10 +95,10 @@ public class AdaptadorPrestamos extends RecyclerView.Adapter<AdaptadorPrestamos.
         tvIdUsuario.setText("ID USUARIO: "+listaPrestamos.get(position).getIdUsuario());
         tvNomUsuario.setText("USUARIO: "+listaPrestamos.get(position).getNomUsuario());
 
-        tvISBN.setText("ISBN: "+listaPrestamos.get(position).getIsbn());
+        tvCOD.setText("COD: "+listaPrestamos.get(position).getCod());
         tvNomLibro.setText("LIBRO: "+listaPrestamos.get(position).getNomLibro());
         tvNomAutor.setText("AUTOR: "+listaPrestamos.get(position).getNomAutor());
-        tvEditorial.setText("EDITORIAL: "+listaPrestamos.get(position).getNomEditorial());
+        tvUbicacion.setText("UBICACION: "+listaPrestamos.get(position).getNomUbicacion());
         tvAnioPublicacion.setText("AÑO DE PUBLICACIÓN: "+listaPrestamos.get(position).getAnioPublicacion());
         tvEdicion.setText("EDICIÓN: "+listaPrestamos.get(position).getEdicion());
 
@@ -111,12 +111,12 @@ public class AdaptadorPrestamos extends RecyclerView.Adapter<AdaptadorPrestamos.
                 String[] arrIdUsuario = tvIdUsuario.getText().toString().split(" ");
                 String idUsuario = arrIdUsuario[2];
 
-                String[] arrIsbn = tvISBN.getText().toString().split(" ");
-                String isbn = arrIsbn[1];
+                String[] arrCod = tvCOD.getText().toString().split(" ");
+                String cod = arrCod[1];
 
-                System.out.println(idUsuario+" , "+isbn);
+                System.out.println(idUsuario+" , "+cod);
 
-                devolverPrestamo(idUsuario, isbn, position);
+                devolverPrestamo(idUsuario, cod, position);
             }
         });
 
@@ -130,7 +130,7 @@ public class AdaptadorPrestamos extends RecyclerView.Adapter<AdaptadorPrestamos.
         builder.show();
     }
 
-    private void devolverPrestamo(String idUsuario, String isbn, int position) {
+    private void devolverPrestamo(String idUsuario, String cod, int position) {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, context.getString(R.string.url_api),
                 new Response.Listener<String>() {
@@ -170,7 +170,7 @@ public class AdaptadorPrestamos extends RecyclerView.Adapter<AdaptadorPrestamos.
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("accion", "706");
                 parametros.put("id_usuario", idUsuario);
-                parametros.put("isbn", isbn);
+                parametros.put("cod", cod);
 
                 return parametros;
             }

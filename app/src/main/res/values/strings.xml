@@ -7,7 +7,7 @@
     <string-array name="lista_menu">
         <item>usuarios</item>
         <item>autores</item>
-        <item>editoriales</item>
+        <item>ubicaciones</item>
         <item>categorias</item>
         <item>libros</item>
         <item>prestamos</item>

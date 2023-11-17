@@ -21,13 +21,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/morado_oscuro" />
+            android:background="#64001D" />
 
         <TextView
-            android:id="@+id/tvISBN"
+            android:id="@+id/tvCOD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ISBN"
+            android:hint="COD"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp" />
 
@@ -64,10 +64,10 @@
             android:layout_marginVertical="10dp" />
 
         <TextView
-            android:id="@+id/tvEditorial"
+            android:id="@+id/tvUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="EDITORIAL"
+            android:hint="UBICACION"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp" />
 

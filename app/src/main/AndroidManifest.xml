@@ -30,7 +30,7 @@
             android:name=".Vistas.VistaLibros"
             android:exported="false" />
         <activity
-            android:name=".Vistas.VistaEditoriales"
+            android:name=".Vistas.VistaUbicaciones"
             android:exported="false" />
         <activity
             android:name=".Vistas.VistaAutores"

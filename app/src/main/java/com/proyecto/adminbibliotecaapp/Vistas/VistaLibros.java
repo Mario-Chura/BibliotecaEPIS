@@ -1,18 +1,14 @@
 package com.proyecto.adminbibliotecaapp.Vistas;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,9 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.proyecto.adminbibliotecaapp.Adaptadores.AdaptadorEditoriales;
 import com.proyecto.adminbibliotecaapp.Adaptadores.AdaptadorLibros;
-import com.proyecto.adminbibliotecaapp.Clases.Editorial;
 import com.proyecto.adminbibliotecaapp.Clases.Libro;
 import com.proyecto.adminbibliotecaapp.R;
 import com.proyecto.adminbibliotecaapp.databinding.ActivityVistaLibrosBinding;
@@ -36,7 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class VistaLibros extends AppCompatActivity {
@@ -101,7 +94,7 @@ public class VistaLibros extends AppCompatActivity {
 
         for (Libro libro : listaLibros) {
             if(
-                    libro.getIsbn().toLowerCase().contains(texto.toLowerCase()) ||
+                    libro.getCod().toLowerCase().contains(texto.toLowerCase()) ||
                     libro.getNom_libro().toLowerCase().contains(texto.toLowerCase()) ||
                     libro.getAutor().toLowerCase().contains(texto.toLowerCase())
             ) {
@@ -136,12 +129,12 @@ public class VistaLibros extends AppCompatActivity {
                                     JSONObject item = jsonArray.getJSONObject(i);
                                     listaLibros.add(
                                             new Libro(
-                                                    item.getString("isbn"),
+                                                    item.getString("cod"),
                                                     item.getString("portada"),
                                                     item.getString("nom_libro"),
                                                     item.getString("autor"),
                                                     item.getString("descripcion"),
-                                                    item.getString("editorial"),
+                                                    item.getString("ubicacion"),
                                                     item.getString("anio_publicacion"),
                                                     item.getString("edicion"),
                                                     item.getInt("existencias"),

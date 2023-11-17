@@ -22,7 +22,7 @@
             android:layout_marginHorizontal="10dp">
 
             <TextView
-                android:id="@+id/tvEditorial"
+                android:id="@+id/tvUbicacion"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textStyle="bold"

@@ -18,11 +18,11 @@
             android:layout_marginBottom="30dp"
             android:padding="20dp"
             android:gravity="center"
-            android:text="EDITAR EDITORIAL"
+            android:text="AGREGAR  UBICACION"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/morado_oscuro" />
+            android:background="#64001D" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -32,10 +32,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etIdEditorial"
+                android:id="@+id/etIdUbicacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ID EDITORIAL" />
+                android:hint="ID UBICACION" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,10 +46,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNomEditorial"
+                android:id="@+id/etNomUbicacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="NOMBRE DE LA EDITORIAL" />
+                android:hint="NOMBRE DE LA BIBLIOTECA" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
