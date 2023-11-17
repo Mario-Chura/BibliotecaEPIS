@@ -16,5 +16,5 @@ $mysqli = new mysqli(
 if($mysqli->connect_errno){
     die("Fallo la conexion");
 } else {
-    //echo "Conexion exitosa";
+    //"Conexion exitosa";
 }

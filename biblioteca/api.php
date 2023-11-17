@@ -5,6 +5,7 @@
 LISTA DE ACCIONES
 
 ACCIONES USUARIOS
+
     200 - Obtener usuario admin login
     201 - Obtener todos los usuarios
     202 - Obtener usuario por nombre o id
@@ -15,18 +16,20 @@ ACCIONES USUARIOS
     207 - Obtener usuario login
 
 ACCIONES AUTORES
+
     301 - Obtener todos los autores
     302 - Obtener autor por nombre o id
     303 - Agregar autor
     304 - Editar autor usando id
     305 - Borrar autor usando id
 
-ACCIONES EDITORIALES
-    401 - Obtener todas las editoriales
-    402 - Obtener editorial por nombre o id
-    403 - Agregar editorial
-    404 - Editar editorial usando id
-    405 - Borrar editorial usando id
+ACCIONES ubicaciones
+
+    401 - Obtener todas las ubicaciones
+    402 - Obtener Ubicacion por nombre o id
+    403 - Agregar Ubicacion
+    404 - Editar Ubicacion usando id
+    405 - Borrar Ubicacion usando id
 
 ACCIONES CATEGORIAS
     501 - Obtener todas las categorias
@@ -36,6 +39,7 @@ ACCIONES CATEGORIAS
     505 - Borrar categoria usando id
 
 ACCIONES LIBROS
+
     601 - Obtener todos los libros
 
 ACCIONES PRESTAMOS
@@ -55,10 +59,10 @@ CODIGOS ERROR
     Solo debes usar un valor para la busqueda del autor (id o nombre)
     No se recibieron los datos del nuevo autor
     No se inserto el nuevo autor
-    No se recibio ningun valor para la busqueda de la editorial
-    Solo debes usar un valor para la busqueda de la editorial (id o nombre)
-    No se recibieron los datos de la nueva editorial
-    No se inserto la nueva editorial
+    No se recibio ningun valor para la busqueda de la Ubicacion
+    Solo debes usar un valor para la busqueda de la Ubicacion (id o nombre)
+    No se recibieron los datos de la nueva Ubicacion
+    No se inserto la nueva Ubicacion
     No se recibio ningun valor para la busqueda de la categoria
     Solo debes usar un valor para la busqueda de la categoria (id o nombre)
     No se recibieron los datos de la nueva categoria
@@ -77,7 +81,7 @@ require 'conexion.php';
 
 $accion = $_POST['accion'];
 
-date_default_timezone_set('America/Mexico_City');
+date_default_timezone_set('America/Lima');
 
 if (empty($accion) || is_null($accion)) {
     echo json_encode(array("codigo" => "ERROR", "mensaje" => "Ninguna accion solicitada"));
@@ -93,7 +97,7 @@ else if ($accion == 200) {
         (empty($idUsuario) || is_null($idUsuario)) &&
         (empty($contrasena) || is_null($contrasena))
     ) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor para la busqueda del usuario"));
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor FRANCO para la busqueda del usuario"));
     } else {
 
         $sql = "SELECT * FROM adminusuarios WHERE lower(id_usuario) = '" . $idUsuario . "' AND contrasena = '" . $contrasena . "';";
@@ -110,6 +114,7 @@ else if ($accion == 200) {
         }
     }
 }
+
 
 // OBTENER USUARIOS
 if ($accion == 201) {
@@ -253,7 +258,7 @@ else if ($accion == 207) {
         (empty($idUsuario) || is_null($idUsuario)) &&
         (empty($contrasena) || is_null($contrasena))
     ) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor para la busqueda del usuario"));
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor Franco 2 para la busqueda del usuario"));
     } else {
 
         $sql = "SELECT * FROM usuarios WHERE lower(id_usuario) = '" . $idUsuario . "' AND contrasena = '" . $contrasena . "';";
@@ -387,10 +392,10 @@ else if ($accion == 305) {
     }
 }
 
-// OBTENER EDITORIALES
+// OBTENER ubicaciones
 if ($accion == 401) {
 
-    $sql = "SELECT * FROM editoriales;";
+    $sql = "SELECT * FROM ubicaciones;";
     $query = $mysqli->query($sql);
 
     $data = array();
@@ -398,31 +403,31 @@ if ($accion == 401) {
         $data[] = $res;
     }
 
-    echo json_encode(array("codigo" => "OK", "editoriales" => $data));
+    echo json_encode(array("codigo" => "OK", "ubicaciones" => $data));
 }
 
-// OBTENER EDITORIAL POR ID O POR NOMBRE
+// OBTENER Ubicacion POR ID O POR NOMBRE
 else if ($accion == 402) {
 
-    $idEditorial = $_POST['id_editorial'];
-    $nomEditorial = $_POST['nom_editorial'];
+    $idUbicacion = $_POST['id_ubicacion'];
+    $nomUbicacion = $_POST['nom_ubicacion'];
 
 
     if (
-        (empty($idEditorial) || is_null($idEditorial)) &&
-        (empty($nomEditorial) || is_null($nomEditorial))
+        (empty($idUbicacion) || is_null($idUbicacion)) &&
+        (empty($nomUbicacion) || is_null($nomUbicacion))
     ) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor para la busqueda de la editorial"));
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibio ningun valor para la busqueda de la Ubicacion"));
     } else {
 
         $sql = "";
 
-        if ((empty($idEditorial) || is_null($idEditorial))) {
-            $sql = "SELECT * FROM editoriales WHERE lower(nom_editorial) LIKE '%" . $nomEditorial . "%';";
+        if ((empty($idUbicacion) || is_null($idUbicacion))) {
+            $sql = "SELECT * FROM ubicaciones WHERE lower(nom_ubicacion) LIKE '%" . $nomUbicacion . "%';";
         } else if ((empty($nomAutor) || is_null($nomAutor))) {
-            $sql = "SELECT * FROM editoriales WHERE id_editorial LIKE '" . $idEditorial . "';";
+            $sql = "SELECT * FROM ubicaciones WHERE id_ubicacion LIKE '" . $idUbicacion . "';";
         } else {
-            echo json_encode(array("codigo" => "ERROR", "mensaje" => "Solo debes usar un valor para la busqueda de la editorial (id o nombre)"));
+            echo json_encode(array("codigo" => "ERROR", "mensaje" => "Solo debes usar un valor para la busqueda de la Ubicacion (id o nombre)"));
         }
 
         $query = $mysqli->query($sql);
@@ -431,74 +436,74 @@ else if ($accion == 402) {
             $data[] = $res;
         }
 
-        echo json_encode(array("codigo" => "OK", "editoriales" => $data));
+        echo json_encode(array("codigo" => "OK", "ubicaciones" => $data));
     }
 }
 
-// AGREGAR EDITORIAL
+// AGREGAR Ubicacion
 else if ($accion == 403) {
 
-    $idEditorial = $_POST['id_editorial'];
-    $nomEditorial = $_POST['nom_editorial'];
+    $idUbicacion = $_POST['id_ubicacion'];
+    $nomUbicacion = $_POST['nom_ubicacion'];
 
     if (
-        (empty($idEditorial) || is_null($idEditorial)) ||
-        (empty($nomEditorial) || is_null($nomEditorial))
+        (empty($idUbicacion) || is_null($idUbicacion)) ||
+        (empty($nomUbicacion) || is_null($nomUbicacion))
     ) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos de la nueva editorial"));
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos de la nueva Ubicacion"));
     } else {
 
-        $sql = "INSERT INTO editoriales VALUES('" . $idEditorial . "', '" . $nomEditorial . "');";
+        $sql = "INSERT INTO ubicaciones VALUES('" . $idUbicacion . "', '" . $nomUbicacion . "');";
         if ($query = $mysqli->query($sql)) {
 
-            echo json_encode(array("codigo" => "OK", "mensaje" => "Se agrego la editorial exitosamente"));
+            echo json_encode(array("codigo" => "OK", "mensaje" => "Se agrego la Ubicacion exitosamente"));
         } else {
 
-            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se inserto la nueva editorial"));
+            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se inserto la nueva Ubicacion"));
         }
     }
 }
 
-// EDITAR EDITORIAL
+// EDITAR Ubicacion
 else if ($accion == 404) {
 
-    $idEditorial = $_POST['id_editorial'];
-    $nomEditorial = $_POST['nom_editorial'];
+    $idUbicacion = $_POST['id_ubicacion'];
+    $nomUbicacion = $_POST['nom_ubicacion'];
 
     if (
-        (empty($idEditorial) || is_null($idEditorial)) ||
-        (empty($nomEditorial) || is_null($nomEditorial))
+        (empty($idUbicacion) || is_null($idUbicacion)) ||
+        (empty($nomUbicacion) || is_null($nomUbicacion))
     ) {
         echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos del autor"));
     } else {
 
-        $sql = "UPDATE autores SET nom_autor='" . $nomEditorial . "' WHERE id_autor='" . $idEditorial . "';";
+        $sql = "UPDATE autores SET nom_autor='" . $nomUbicacion . "' WHERE id_autor='" . $idUbicacion . "';";
         if ($query = $mysqli->query($sql)) {
 
-            echo json_encode(array("codigo" => "OK", "mensaje" => "Se actualizo la editorial exitosamente"));
+            echo json_encode(array("codigo" => "OK", "mensaje" => "Se actualizo la Ubicacion exitosamente"));
         } else {
 
-            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se actualizo la editorial"));
+            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se actualizo la Ubicacion"));
         }
     }
 }
 
-// BORRAR EDITORIAL
+// BORRAR Ubicacion
 else if ($accion == 405) {
 
-    $idEditorial = $_POST['id_editorial'];
+    $idUbicacion = $_POST['id_ubicacion'];
 
-    if (empty($idEditorial) || is_null($idEditorial)) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibi el ID de la editorial"));
+    if (empty($idUbicacion) || is_null($idUbicacion)) {
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibi el ID de la Ubicacion"));
     } else {
 
-        $sql = "DELETE FROM editoriales WHERE id_editorial='" . $idEditorial . "';";
+        $sql = "DELETE FROM ubicaciones WHERE id_ubicacion='" . $idUbicacion . "';";
         if ($query = $mysqli->query($sql)) {
 
-            echo json_encode(array("codigo" => "OK", "mensaje" => "Se borro la editorial exitosamente"));
+            echo json_encode(array("codigo" => "OK", "mensaje" => "Se borro la Ubicacion exitosamente"));
         } else {
 
-            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se pudo borrar la editorial"));
+            echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se pudo borrar la Ubicacion"));
         }
     }
 }
@@ -547,7 +552,7 @@ else if ($accion == 502) {
             $data[] = $res;
         }
 
-        echo json_encode(array("codigo" => "OK", "editoriales" => $data));
+        echo json_encode(array("codigo" => "OK", "ubicaciones" => $data));
     }
 }
 
@@ -636,38 +641,38 @@ if ($accion == 601) {
 // AGREGAR LIBRO
 else if ($accion == 603) {
 
-    $isbn = $_POST['isbn'];
+    $cod = $_POST['cod'];
     $nomLibro = $_POST['nom_libro'];
     $nomAutor = $_POST['nom_autor'];
     $descripcion = $_POST['descripcion'];
-    $editorial = $_POST['nom_editorial'];
+    $ubicacion = $_POST['nom_ubicacion'];
     $nomCategoria = $_POST['nom_categoria'];
     $anioPublicacion = $_POST['anio_publicacion'];
     $edicion = $_POST['edicion'];
     $existencias = $_POST['existencias'];
 
     if (
-        (empty($isbn) || is_null($isbn)) ||
+        (empty($cod) || is_null($cod)) ||
         (empty($nomLibro) || is_null($nomLibro)) ||
         (empty($nomAutor) || is_null($nomAutor)) ||
-        (empty($editorial) || is_null($editorial)) ||
+        (empty($ubicacion) || is_null($ubicacion)) ||
         (empty($nomCategoria) || is_null($nomCategoria)) ||
         (empty($anioPublicacion) || is_null($anioPublicacion)) ||
         (empty($edicion) || is_null($edicion)) ||
         (empty($existencias) || is_null($existencias))
     ) {
-        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos del libro"));
+        echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos del libro1"));
     } else {
 
-        $portada = $isbn . ".png";
+        $portada = $cod . ".jpg";
 
         $sql = "INSERT INTO libros VALUES(
-            '" . $isbn . "', 
+            '" . $cod . "', 
             '" . $portada . "', 
             '" . $nomLibro . "', 
             '" . $nomAutor . "', 
             '" . $descripcion . "', 
-            '" . $editorial . "', 
+            '" . $ubicacion . "', 
             '" . $anioPublicacion . "', 
             '" . $edicion . "', 
             '" . $existencias . "', 
@@ -688,10 +693,10 @@ if ($accion == 701) {
 
     $sql = "
     SELECT 
-        libros.isbn, 
+        libros.cod, 
         libros.nom_libro, 
         libros.autor, 
-        libros.editorial, 
+        libros.ubicacion, 
         libros.anio_publicacion, 
         libros.edicion,
         usuarios.id_usuario,
@@ -701,7 +706,7 @@ if ($accion == 701) {
         prestamos.fecha_devolucion 
     FROM libros, usuarios, prestamos
     WHERE 
-        libros.isbn = prestamos.isbn and
+        libros.cod = prestamos.cod and
         usuarios.id_usuario = prestamos.id_usuario ORDER BY nom_usuario ASC;";
 
     $query = $mysqli->query($sql);
@@ -724,17 +729,17 @@ if ($accion == 702) {
     } else {
         $sql = "
     SELECT 
-        libros.isbn, 
+        libros.cod, 
         libros.nom_libro, 
         libros.autor, 
-        libros.editorial, 
+        libros.ubicacion, 
         libros.anio_publicacion, 
         libros.edicion,
         prestamos.fecha_prestamo,
         prestamos.fecha_devolucion 
     FROM libros, prestamos
     WHERE 
-        libros.isbn=prestamos.isbn and
+        libros.cod=prestamos.cod and
         prestamos.id_usuario='" . $idUsuario . "';";
 
     $query = $mysqli->query($sql);
@@ -751,11 +756,11 @@ if ($accion == 702) {
 
 // AGREGAR PRESTAMO
 else if ($accion == 703) {
-    $isbn = $_POST['isbn'];
+    $cod = $_POST['cod'];
     $idUsuario = $_POST['id_usuario'];
 
     if (
-        (empty($isbn) || is_null($isbn)) ||
+        (empty($cod) || is_null($cod)) ||
         (empty($idUsuario) || is_null($idUsuario))
     ) {
         echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos del prestamo"));
@@ -767,10 +772,10 @@ else if ($accion == 703) {
         //echo "3 DIAS MAS: ".$diasMas;
 
 
-        $sql = "update libros set existencias=existencias-1 where isbn='" . $isbn . "';";
+        $sql = "update libros set existencias=existencias-1 where cod='" . $cod . "';";
         if ($query = $mysqli->query($sql)) {
 
-            $sql2 = "insert into prestamos values('" . $isbn . "', '" . $idUsuario . "', '" . $hoy . "', '" . $diasMas . "');";
+            $sql2 = "insert into prestamos values('" . $cod . "', '" . $idUsuario . "', '" . $hoy . "', '" . $diasMas . "');";
             if ($query = $mysqli->query($sql2)) {
 
                 $sql3 = "update usuarios set estado_usuario = 'deudor' where id_usuario='" . $idUsuario . "';";
@@ -795,24 +800,24 @@ else if ($accion == 703) {
 else if($accion == 706) {
 
     $idUsuario = $_POST['id_usuario'];
-    $isbn = $_POST['isbn'];
+    $cod = $_POST['cod'];
     
     if (
         (empty($idUsuario) || is_null($idUsuario)) ||
-        (empty($isbn) || is_null($isbn))
+        (empty($cod) || is_null($cod))
     ) {
 
         echo json_encode(array("codigo" => "ERROR", "mensaje" => "No se recibieron los datos de la devolucion"));
 
     } else {
 
-        $sql = "update libros set existencias=existencias+1 where isbn='" . $isbn . "';";
+        $sql = "update libros set existencias=existencias+1 where cod='" . $cod . "';";
         if ($query = $mysqli->query($sql)) {
 
             $sql2 = "update usuarios set estado_usuario=NULL where id_usuario='" . $idUsuario . "';";
             if ($query = $mysqli->query($sql2)) {
 
-                $sql3 = "delete from prestamos where isbn='" . $isbn . "' and id_usuario='" . $idUsuario . "';";
+                $sql3 = "delete from prestamos where cod='" . $cod . "' and id_usuario='" . $idUsuario . "';";
                 if ($query = $mysqli->query($sql3)) {
                     echo json_encode(array("codigo" => "OK", "mensaje" => "Se registro la devolucion exitosamente"));
                 } else {
